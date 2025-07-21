@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgresql:
+    container_name: silvia.local.db
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'user1234'
+      POSTGRES_DB: 'spe'
+    ports:
+      - '5432:5432'
