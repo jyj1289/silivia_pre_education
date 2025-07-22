@@ -19,4 +19,8 @@ export class UserService {
       data: request,
     });
   }
+
+  delete(id: number) {
+    return this.prisma.user.delete({ where: { userId: id } });
+  }
 }
