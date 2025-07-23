@@ -3,9 +3,10 @@ import {
   Controller,
   Delete,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
-  Put,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
@@ -16,13 +17,16 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() request: CreateUserDto) {
+  create(@Body(ValidationPipe) request: CreateUserDto) {
     return this.userService.create(request);
   }
 
   @Patch('/:id')
-  update(@Param('id') id: string, @Body() request: UpdateUserDto) {
-    return this.userService.update(parseInt(id), request);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(ValidationPipe) request: UpdateUserDto,
+  ) {
+    return this.userService.update(id, request);
   }
 
   @Delete('/:id')
