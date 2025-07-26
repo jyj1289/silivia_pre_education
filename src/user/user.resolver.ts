@@ -9,22 +9,28 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => [User], { name: 'user' })
-  findAll() {
+  async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @Mutation(() => User)
-  createUser(@Args('createUserInput') input: CreateUserInput) {
+  async createUser(
+    @Args('createUserInput') input: CreateUserInput,
+  ): Promise<User> {
     return this.userService.create(input);
   }
 
   @Mutation(() => User)
-  updateUser(@Args('updateUserInput') input: UpdateUserInput) {
+  async updateUser(
+    @Args('updateUserInput') input: UpdateUserInput,
+  ): Promise<User> {
     return this.userService.update(input);
   }
 
   @Mutation(() => User)
-  DeleteUser(@Args('userId', { type: () => Int }) id: number) {
+  async deleteUser(
+    @Args('userId', { type: () => Int }) id: number,
+  ): Promise<User> {
     return this.userService.delete(id);
   }
 }
