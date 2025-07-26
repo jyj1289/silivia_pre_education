@@ -5,6 +5,7 @@
 type User {
   userId: Int!
   name: String!
+  amount: Int!
 }
 
 type Product {
@@ -21,22 +22,42 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type OrderItem {
+  order: Order!
+  product: Product!
+  quantity: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Order {
+  orderId: Int!
+  user: User!
+  orderItems: [OrderItem!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   user: [User!]!
-  product: [Product!]!
+  products: [Product!]!
+  product(productId: Int!): Product!
+  orders(userId: Int!): [Order!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  DeleteUser(userId: Int!): User!
+  deleteUser(userId: Int!): User!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: Int!): Product!
+  createOrder(userId: Int!, createOrderInput: CreateOrderInput!): Order!
 }
 
 input CreateUserInput {
   name: String!
+  amount: Int!
 }
 
 input UpdateUserInput {
@@ -54,5 +75,14 @@ input UpdateProductInput {
   productId: Int!
   name: String!
   price: Int!
+  quantity: Int!
+}
+
+input CreateOrderInput {
+  items: [CreateOrderItemInput!]!
+}
+
+input CreateOrderItemInput {
+  productId: Int!
   quantity: Int!
 }

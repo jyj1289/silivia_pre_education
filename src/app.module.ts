@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ProductModule } from './product/product.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ProductModule } from './product/product.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     ProductModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],
