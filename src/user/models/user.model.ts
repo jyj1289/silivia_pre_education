@@ -7,4 +7,7 @@ export class User {
 
   @Field((type) => String)
   name: string;
+
+  @Field((type) => Int)
+  amount: number;
 }

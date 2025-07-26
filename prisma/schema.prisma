@@ -16,6 +16,7 @@ datasource db {
 model User {
   userId Int @id @default(autoincrement()) @map("user_id")
   name String 
+  amount Int
   orders Order[]
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
