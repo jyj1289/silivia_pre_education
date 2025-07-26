@@ -6,5 +6,5 @@ export class UpdateUserInput {
   userId: number;
 
   @Field((type) => String)
-  job: string;
+  name: string;
 }

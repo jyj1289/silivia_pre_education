@@ -7,10 +7,4 @@ export class User {
 
   @Field((type) => String)
   name: string;
-
-  @Field((type) => Int)
-  age: number;
-
-  @Field((type) => String)
-  job: string;
 }
