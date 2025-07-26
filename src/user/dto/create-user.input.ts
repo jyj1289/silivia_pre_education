@@ -6,5 +6,5 @@ export class CreateUserInput {
   name: string;
 
   @Field((type) => String)
-  amount: string;
+  amount: number;
 }
