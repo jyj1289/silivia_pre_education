@@ -8,9 +8,16 @@ import { UpdateProductInput } from './dto/update-product.input';
 export class ProductResolver {
   constructor(private readonly productService: ProductService) {}
 
-  @Query(() => [Product], { name: 'product' })
+  @Query(() => [Product], { name: 'products' })
   async findAll(): Promise<Product[]> {
     return this.productService.findAll();
+  }
+
+  @Query(() => Product, { name: 'product' })
+  async findOne(
+    @Args('productId', { type: () => Int }) id: number,
+  ): Promise<Product> {
+    return this.productService.findOne(id);
   }
 
   @Mutation(() => Product)
