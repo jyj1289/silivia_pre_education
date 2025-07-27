@@ -36,4 +36,11 @@ export class UserService {
   async delete(userId: number): Promise<User> {
     return await this.prisma.user.delete({ where: { userId } });
   }
+
+  async deposit(userId: number, amount: number): Promise<User> {
+    return await this.prisma.user.update({
+      where: { userId },
+      data: { amount: { increment: amount } },
+    });
+  }
 }

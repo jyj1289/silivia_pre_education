@@ -33,4 +33,12 @@ export class UserResolver {
   ): Promise<User> {
     return this.userService.delete(id);
   }
+
+  @Mutation(() => User)
+  async deposit(
+    @Args('userId', { type: () => Int }) id: number,
+    @Args('amount', { type: () => Int }) amount: number,
+  ): Promise<User> {
+    return this.userService.deposit(id, amount);
+  }
 }
